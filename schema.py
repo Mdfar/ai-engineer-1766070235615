@@ -1,0 +1,5 @@
+from pydantic import BaseModel, Field from typing import List, Optional
+
+class ExtractedEntity(BaseModel): name: str = Field(..., description="The name of the person or organization") type: str = Field(..., description="The category, e.g., 'Person', 'Organization', 'Location'") context: str = Field(..., description="A brief sentence describing the entity's role in the text")
+
+class DocumentAnalysis(BaseModel): summary: str = Field(..., description="A concise 2-3 sentence summary of the document content") sentiment: str = Field(..., description="The overall tone: Positive, Negative, or Neutral") entities: List[ExtractedEntity] = Field(..., description="A list of key entities mentioned in the text") priority_level: int = Field(..., ge=1, le=5, description="Priority score from 1 to 5 based on urgency")
